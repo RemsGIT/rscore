@@ -18,11 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className={'light'}>
+      <body>
         <Providers>
-          
           <Header />
-          
           {children}
         </Providers>
       </body>

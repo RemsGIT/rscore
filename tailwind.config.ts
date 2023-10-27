@@ -15,6 +15,9 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      fontFamily: {
+          'agbalumo': ['Agbalumo']
+      }
     },
   },
   darkMode: "class",
@@ -22,20 +25,22 @@ const config: Config = {
     themes: {
       light: {
         colors: {
+          background: '#F4F5FA',
+          foreground: '#544F5A',
           primary: {
             DEFAULT: '#339966',
           },
-          focus: "#339966"
         },
       },
       dark: {
         colors: {
+          background: '#27282f',
+          foreground: '#CBCACF',
           primary: {
             DEFAULT: '#339966',
           },
-          focus: "#339966"
         },
-      }
+      },
     }
   })],
 }
