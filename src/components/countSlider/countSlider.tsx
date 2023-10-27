@@ -3,7 +3,7 @@ import {ChangeEvent, useState} from "react";
 
 import styles from "./countSlider.module.css";
 
-const countSlider = () => {
+const CountSlider = () => {
 
     const [totalParticipant, setTotalParticipant] = useState<number>(2)
 
@@ -20,4 +20,4 @@ const countSlider = () => {
     )
 }
 
-export default countSlider
+export default CountSlider
