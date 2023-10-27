@@ -6,5 +6,5 @@
 
 
 html {
-    transition: all .3s !important;
+    transition: background-color .2s !important;
 }

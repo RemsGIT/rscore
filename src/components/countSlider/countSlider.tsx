@@ -1,15 +1,19 @@
 "use client"
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 
 import styles from "./countSlider.module.css";
 
-const CountSlider = () => {
+const CountSlider = ({handleChangeNumber}: {handleChangeNumber: (nb: number) => void}) => {
 
     const [totalParticipant, setTotalParticipant] = useState<number>(2)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setTotalParticipant(+e.target.value)
     }
+
+    useEffect(() => {
+        handleChangeNumber(totalParticipant)
+    }, [totalParticipant]);
     
     return (
         <>

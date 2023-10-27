@@ -5,30 +5,20 @@ import {ArrowLeft} from "lucide-react";
 import GameCreateForm from "@/components/gameCreateForm/gameCreateForm";
 import {useEffect, useState} from "react";
 import {Game} from "@/types/game";
+import {log} from "util";
 
 
-const GameCreatePage = ({params}: {params: {name: string}}) => {
+const GameCreatePage = ({params}: {params: {id: string}}) => {
     const [game, setGame] = useState<Game>();
     
     // Get in database the game by his ID
     useEffect(() => {
-        switch(params.name) {
-            case '1': 
-                setGame({
-                    id: 1,
-                    name: 'Skyjo',
-                    image: 'skyjo.png'
-                })
-                break;
-            case '2':
-                setGame({
-                    id: 2,
-                    name: '6 qui prend !',
-                    image: '6quiprend.png'
-                })
-                break;
-        }
-    }, [params.name]);
+        fetch(`/api/game?id=${params.id}`)
+            .then(response => response.json())
+            .then(response => {
+                setGame(response.game)
+            })
+    }, []);
     
     
     return (
