@@ -10,7 +10,6 @@ export async function GET(request: NextRequest) {
     const id = url.searchParams.get('id')
     
     if(id) {
-
         const game = await prisma.game.findUnique({
             where: {id}
         })
