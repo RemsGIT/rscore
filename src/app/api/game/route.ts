@@ -7,11 +7,14 @@ export async function GET(request: NextRequest) {
 
     const url = new URL(request.url)
 
-    const id = url.searchParams.get('id')
+    const slug = url.searchParams.get('slug')
     
-    if(id) {
-        const game = await prisma.game.findUnique({
-            where: {id}
+    if(slug) {
+        const game = await prisma.game.findFirst({
+            where: {
+                //@ts-ignore
+                slug: slug
+            }
         })
         
         return NextResponse.json({

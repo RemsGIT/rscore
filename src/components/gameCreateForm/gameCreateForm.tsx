@@ -12,13 +12,11 @@ const GameCreateForm = ({name}: {name: string}) => {
     
     
     // Get details of the game
-    
     const handleNbParticipantChange = (nb: number) => {
         if(nb != nbUser) {
             setNbUser(nb)
         }
     }
-    
     
     const handleSubmit = () => {
     }

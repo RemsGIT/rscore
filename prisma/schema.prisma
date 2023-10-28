@@ -12,8 +12,9 @@ datasource db {
 }
 
 model Game {
-  id        String @id @default(cuid())
+  id        String  @id @default(cuid())
   name      String
+  slug      String?
   image     String
   minPlayer Int?
   maxPlayer Int?

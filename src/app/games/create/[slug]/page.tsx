@@ -8,12 +8,12 @@ import {Game} from "@/types/game";
 import {log} from "util";
 
 
-const GameCreatePage = ({params}: {params: {id: string}}) => {
+const GameCreatePage = ({params}: {params: {slug: string}}) => {
     const [game, setGame] = useState<Game>();
     
     // Get in database the game by his ID
     useEffect(() => {
-        fetch(`/api/game?id=${params.id}`)
+        fetch(`/api/game?slug=${params.slug}`)
             .then(response => response.json())
             .then(response => {
                 setGame(response.game)
