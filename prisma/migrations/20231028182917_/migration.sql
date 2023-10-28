@@ -2,6 +2,7 @@
 CREATE TABLE "Game" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT,
     "image" TEXT NOT NULL,
     "minPlayer" INTEGER,
     "maxPlayer" INTEGER,
