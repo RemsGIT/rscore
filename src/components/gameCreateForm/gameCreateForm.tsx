@@ -10,7 +10,6 @@ const GameCreateForm = ({name}: {name: string}) => {
     
     const [nbUser, setNbUser] = useState<number>(2)
     
-    
     // Get details of the game
     const handleNbParticipantChange = (nb: number) => {
         if(nb != nbUser) {
