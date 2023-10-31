@@ -5,6 +5,7 @@ import {gameStore} from "@/store/storeGame";
 import {Game, userGame} from "@/types/game";
 import {useEffect, useState} from "react";
 import SixQuiPrendPlayMode from "@/components/gamePlayMode/6quiprend";
+import Skyjo from "@/components/gamePlayMode/skyjo";
 
 const PlayGame = ({params}:{params: {id: string}}) => {
     const [userGame, setUserGame] = useState<userGame>();
@@ -25,6 +26,7 @@ const PlayGame = ({params}:{params: {id: string}}) => {
             {userGame && userGame.game.id && (
                 <>
                     {userGame.game.folderName === "6quiprend" && <SixQuiPrendPlayMode data={userGame}/>}
+                    {userGame.game.folderName === "skyjo" && <Skyjo data={userGame}/>}
                 </>
             )}
         </>

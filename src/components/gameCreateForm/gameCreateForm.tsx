@@ -4,12 +4,13 @@
 import {Input} from "@nextui-org/react";
 import CountSlider from "@/components/countSlider/countSlider";
 import {Button} from "@nextui-org/react";
-import {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 import {Game} from "@/types/game";
 import {gameStore} from "@/store/storeGame";
 import {Participant} from "@/types/participant";
 import ModalParticipant from "@/components/gameCreateForm/modalParticipant";
 import {useRouter} from "next/navigation";
+import ConfettiExplosion from "react-confetti-explosion";
 
 const GameCreateForm = ({game_id}: {game_id: number}) => {
     const router = useRouter();
@@ -60,7 +61,6 @@ const GameCreateForm = ({game_id}: {game_id: number}) => {
     
     return (
         <div className={"pt-8 w-[90%] md:w-[60%] mx-auto"}>
-
             { /*  TITLE -> game name  */ }
             <div className={"pb-8 min-h-[100px] text-primary font-agbalumo"}>
                 <h1 className={"text-6xl text-center"}>{game?.name}</h1>

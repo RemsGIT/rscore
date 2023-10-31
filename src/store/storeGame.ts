@@ -23,12 +23,11 @@ export const gameStore = {
         }
     ] as Game[],
     createUserGame: async (game: Game, roundName: string, users: Participant[]) => {
-        console.log(game, roundName, users)
-        
-        const data = {game, roundName, participants: users, nbRound: 0}
+        const data = {game, roundName, participants: users, nbRound: 0, id: ''}
         
         
         const uuid = generateUUID()
+        data.id = uuid
         localStorage.setItem(uuid, JSON.stringify(data))
         
         return {
@@ -48,7 +47,10 @@ export const gameStore = {
         return {success: false}
     },
     updateGame: async (data: userGame) => {
-        
+        console.log(data)
+        if(localStorage.getItem(data.id)) {
+            localStorage.setItem(data.id, JSON.stringify(data))
+        }
     }
 }
 
