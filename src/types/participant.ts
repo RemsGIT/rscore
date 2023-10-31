@@ -1,9 +1,9 @@
 export interface Participant {
     name: string,
-    points: Point[]
+    points?: Point[]
 }
 
 export interface Point {
-    value: number,
-    round?: number
+    round: number,
+    point: number
 }

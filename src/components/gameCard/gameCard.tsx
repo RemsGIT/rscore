@@ -8,7 +8,7 @@ import Link from "next/link";
 const GameCard = ({game}:{game: Game}) => {
     return (
         <>
-            <Link href={`/games/create/${game.slug}`} className={"inline-block"}>
+            <Link href={`/games/create/${game.folderName}`} className={"inline-block"}>
                 <Card
                     isFooterBlurred={false}
                     radius="lg"

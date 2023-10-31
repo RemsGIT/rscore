@@ -1,17 +1,58 @@
-import {Game} from "@/types/game";
+import {Game, userGame} from "@/types/game";
 import {Participant} from "@/types/participant";
+import {v4 as uuidv4} from 'uuid';
+
 
 export const gameStore = {
-    createGame: async (game: Game, users: Participant[]) => {
-        console.log(game, users)
+    games: [
+        {
+            id: 1,
+            name: 'Skyjo',
+            image: 'skyjo.png',
+            folderName: 'skyjo',
+            minPlayer: 2,
+            maxPlayer: undefined
+        },
+        {
+            id: 2,
+            name: '6 qui prend !',
+            image: '6quiprend.png',
+            folderName: '6quiprend',
+            minPlayer: 2,
+            maxPlayer: undefined
+        }
+    ] as Game[],
+    createUserGame: async (game: Game, roundName: string, users: Participant[]) => {
+        console.log(game, roundName, users)
+        
+        const data = {game, roundName, participants: users, nbRound: 0}
+        
+        
+        const uuid = generateUUID()
+        localStorage.setItem(uuid, JSON.stringify(data))
+        
+        return {
+            id: uuid,
+            data: data
+        }
     },
-    getGame: async (id: string) => {
-        const game = localStorage.getItem(`rscore_${id}`)
-
+    getUserGame: async (id: string) => {
+        const game = localStorage.getItem(`${id}`)
+        
         if(game) {
-            return {success: true, game}
+            const userGame: userGame = JSON.parse(game)
+
+            return {success: true, game: userGame}
         }
 
         return {success: false}
+    },
+    updateGame: async (data: userGame) => {
+        
     }
+}
+
+
+const generateUUID = () => {
+    return uuidv4();
 }

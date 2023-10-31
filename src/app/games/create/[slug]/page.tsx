@@ -1,39 +1,32 @@
 "use client"
-
-import Link from "next/link";
-import {ArrowLeft} from "lucide-react";
-import GameCreateForm from "@/components/gameCreateForm/gameCreateForm";
 import {useEffect, useState} from "react";
 import {Game} from "@/types/game";
-import {log} from "util";
+import {gameStore} from "@/store/storeGame";
+import GameCreateForm from "@/components/gameCreateForm/gameCreateForm";
 
-
-const GameCreatePage = ({params}: {params: {slug: string}}) => {
+const CreateGame = ({params}:{params: {slug: string}}) => {
+    
     const [game, setGame] = useState<Game>();
     
-    // Get in database the game by his ID
     useEffect(() => {
-        fetch(`/api/game?slug=${params.slug}`)
-            .then(response => response.json())
-            .then(response => {
-                setGame(response.game)
-            })
-    }, []);
+        if(params.slug) {
+            const gameInStore = gameStore.games.find(game => game.folderName === params.slug)
+            
+            if(gameInStore) {
+                setGame(gameInStore)
+            }
+            else {
+                // Throw 404
+            }
+        }
+    }, [params.slug]);
     
     
     return (
         <>
-            <div>
-                <Link href={"/games"} className={"flex text-sm items-center m-2"}>
-                    <ArrowLeft color={"#339966"} size={30} />
-                    <span className={"text-primary"}>Retourner à la liste des jeux</span>
-                </Link>
-            </div>
-
-
-            <GameCreateForm name={game?.name as string}/>
+            {game && <GameCreateForm game_id={game?.id}/>}
         </>
     )
 }
 
-export default GameCreatePage
+export default CreateGame
