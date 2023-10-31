@@ -10,6 +10,6 @@ html {
 }
 
 input {
-    font-size: 16px;
+    font-size: 16px !important;
     touch-action: manipulation;
 }

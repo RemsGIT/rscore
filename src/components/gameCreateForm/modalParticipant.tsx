@@ -30,7 +30,7 @@ const ModalParticipant = ({open, handleClose, participants, handleUpdateParticip
     
     return (
         <>
-            <Modal backdrop={"blur"} isOpen={open} size={"5xl"} placement={"center"} hideCloseButton={true} scrollBehavior={"inside"}>
+            <Modal backdrop={"blur"} isOpen={open} size={"5xl"} placement={"top-center"} hideCloseButton={true} scrollBehavior={"inside"}>
                 <ModalContent>
                     <ModalHeader className="flex flex-col gap-1">Liste des joueurs</ModalHeader>
                     <ModalBody>
@@ -66,7 +66,7 @@ const ModalParticipant = ({open, handleClose, participants, handleUpdateParticip
 
 
             {/* MODAL NAME PARTICIPANT */}
-            <Modal backdrop={"blur"} isOpen={isOpenModalName} onClose={() => setIsOpenModalName(false)} placement={"center"} scrollBehavior={"inside"}>
+            <Modal backdrop={"blur"} isOpen={isOpenModalName} onClose={() => setIsOpenModalName(false)} placement={"top-center"} scrollBehavior={"inside"}>
                 <ModalContent>
                     <form onSubmit={(event) => {
                         event.preventDefault()

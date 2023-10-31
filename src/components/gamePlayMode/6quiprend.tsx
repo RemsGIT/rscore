@@ -183,7 +183,7 @@ const SixQuiPrendPlayMode = ({data}:{data: userGame}) => {
             </div>
 
             {/* MODAL EDIT POINT */}
-            <Modal backdrop={"blur"} isOpen={openModalEditPoint} onClose={() => setOpenModalEditPoint(false)} placement={"center"} scrollBehavior={"inside"}>
+            <Modal backdrop={"blur"} isOpen={openModalEditPoint} onClose={() => setOpenModalEditPoint(false)} placement={"top-center"} scrollBehavior={"inside"}>
                 <ModalContent>
                     <ModalHeader className="flex flex-col gap-1">
                         <span className={"text-2xl"}>{data.participants[participantIndexToEditPoints  ?? 0].name}</span>
