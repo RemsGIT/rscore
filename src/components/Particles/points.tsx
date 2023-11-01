@@ -18,7 +18,10 @@ export default function PointsParticles() {
 
     console.log('ok')
 
-    const isMobile = window.innerWidth <= 900;
+    let isMobile = true;
+    if (typeof window !== "undefined") {
+        isMobile = window.innerWidth <= 900;
+    }
     
     return (
         <div id='particle-background' className={"absolute"}>
