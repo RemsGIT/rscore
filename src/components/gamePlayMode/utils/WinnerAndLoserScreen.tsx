@@ -5,8 +5,9 @@ import Confetti from 'react-confetti'
 import {Crown} from "lucide-react";
 import {useRouter} from "next/navigation";
 import {Game} from "@/types/game";
+import {gameStore} from "@/store/storeGame";
 
-const WinnerAndLoserScreen = ({winner,loser, show, game}: {winner: Participant | null, loser: Participant | null, show: boolean, game: Game}) => {
+const WinnerAndLoserScreen = ({winner,loser, show, game, idOfGame}: {winner: Participant | null, loser: Participant | null, show: boolean, game: Game, idOfGame: string}) => {
     const router = useRouter();
     const [winnerPoints, setWinnerPoints] = useState<number>()
     const [loserPoints, setLoserPoints] = useState<number>()
@@ -18,6 +19,14 @@ const WinnerAndLoserScreen = ({winner,loser, show, game}: {winner: Participant |
             setLoserPoints(loser?.points?.reduce((acc, val) => acc + val.point, 0))
         }
     }, [winner, loser]);
+    
+    const handleRematch = () => {
+        gameStore.rematch(idOfGame).then(response => {
+            if(response) {
+                router.push(`/games/play/${response.id}`)
+            }
+        });
+    }
     
     return (
         <>
@@ -44,7 +53,7 @@ const WinnerAndLoserScreen = ({winner,loser, show, game}: {winner: Participant |
                             </div>
 
                             <div className={"mt-16"}>
-                                <Button color="default" onPress={() => router.push(`/games/create/${game.folderName}`)}>
+                                <Button color="default" /*onPress={() => router.push(`/games/create/${game.folderName}`)}*/ onPress={handleRematch}>
                                     Refaire une partie
                                 </Button>
                             </div>

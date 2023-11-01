@@ -6,7 +6,6 @@ import {useTheme} from "next-themes";
 
 export default function PointsParticles() {
     const particlesInit = useCallback(async (engine: any) => {
-        console.log(engine);
         // you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
         // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
         // starting from v2 you can add only the features you need reducing the bundle size
@@ -15,9 +14,7 @@ export default function PointsParticles() {
     const {theme, setTheme} = useTheme()
 
     const isDarkTheme = theme === 'dark';
-
-    console.log('ok')
-
+    
     let isMobile = true;
     if (typeof window !== "undefined") {
         isMobile = window.innerWidth <= 900;

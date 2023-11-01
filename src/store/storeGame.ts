@@ -60,6 +60,28 @@ export const gameStore = {
                 localStorage.setItem(idOfGame, JSON.stringify(gamesFormatted))
             }
         }
+    },
+    rematch: async (idOfGame: string) => {
+        const game = localStorage.getItem(idOfGame);
+
+        if(game) {
+            const gamesFormatted: {id: string, games: userGame[]} = JSON.parse(game);
+            
+            gamesFormatted.games.forEach(game => {
+                game.nbRound = 0;
+                game.participants.forEach(participant => {
+                    participant.points = []; // Réinitialisation du tableau de points
+                });
+            });
+            
+            const newGame: {id: string, games: userGame[]} = {
+                id: generateUUID(),
+                games: gamesFormatted.games
+            }
+            localStorage.setItem(newGame.id, JSON.stringify(newGame))
+            
+            return newGame
+        }
     }
 }
 
