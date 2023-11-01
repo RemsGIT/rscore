@@ -19,7 +19,6 @@ const GameCreateForm = ({game_id}: {game_id: number}) => {
     
     const [game, setGame] = useState<Game>();
 
-    const [roundName, setRoundName] = useState<string>("")
     const [nbUser, setNbUser] = useState<number>(2)
     
     const [participants, setParticipants] = useState<Participant[]>([])
@@ -52,7 +51,7 @@ const GameCreateForm = ({game_id}: {game_id: number}) => {
     const handleSubmitGame = () => {
         setIsGameSubmitting(true)
         if(game) {
-            gameStore.createUserGame(game, roundName, participants).then(res => {
+            gameStore.createUserGame(game, participants).then(res => {
                 router.push(`/games/play/${res.id}`)
             })
         }
@@ -65,16 +64,7 @@ const GameCreateForm = ({game_id}: {game_id: number}) => {
             <div className={"pb-8 min-h-[100px] text-primary font-agbalumo"}>
                 <h1 className={"text-6xl text-center"}>{game?.name}</h1>
             </div>
-
-            { /*  part name  */ }
-            <div>
-                <Input type={"text"} variant={"bordered"} placeholder={"Nom de la partie"} classNames={{
-                    input: 'text-center'
-                }}
-                onInput={(e: ChangeEvent<HTMLInputElement>) => setRoundName(e.target.value)}
-                />
-            </div>
-
+            
             { /* COUNTER  */ }
             <div className={"mt-28"}>
                 <CountSlider handleChangeNumber={handleNbParticipantChange} />

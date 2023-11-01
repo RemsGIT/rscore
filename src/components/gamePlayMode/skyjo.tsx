@@ -3,9 +3,16 @@
 import {userGame} from "@/types/game";
 import PointsWithArray from "@/components/gamePlayMode/pointsWithArray";
 
-const SkyjoPlayMode = ({data}:{data: userGame}) => {
+const SkyjoPlayMode = ({data}:{data: {id: string, games: userGame[]}}) => {
 
-    return <PointsWithArray data={data} winWithMaxPoint={false} maxPoint={100} /> // Lose if reach 100 points
+    return (
+        <>
+            {data.games.map(game => (
+                <PointsWithArray key={game.id} idOfGame={data.id}  data={game} winWithMaxPoint={false} maxPoint={100} />
+            ))}
+        </>
+    )
+        
 }
 
 export default SkyjoPlayMode

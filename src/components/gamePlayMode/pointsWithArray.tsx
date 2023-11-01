@@ -18,9 +18,7 @@ import DigitScoreInArray from "@/components/playMode/digitScoreInArray";
 import WinnerAndLoserScreen from "@/components/gamePlayMode/utils/WinnerAndLoserScreen";
 import {userGame} from "@/types/game";
 
-const PointsWithArray = ({data, winWithMaxPoint, maxPoint}: {data: userGame, winWithMaxPoint: boolean, maxPoint: number}) => {
-    
-    
+const PointsWithArray = ({idOfGame, data, winWithMaxPoint, maxPoint}: {idOfGame: string, data: userGame, winWithMaxPoint: boolean, maxPoint: number}) => {
     const [openModalEditPoint, setOpenModalEditPoint] = useState<boolean>(false)
 
     const [roundNumberToEditPoints, setRoundNumberToEditPoints] = useState<number>(0);
@@ -49,7 +47,7 @@ const PointsWithArray = ({data, winWithMaxPoint, maxPoint}: {data: userGame, win
             setIsGameStartState(false)
         }
     }, []);
-
+    
     const refreshTotals = () => {
         const t: any = data.participants.map((participant) =>
             participant?.points?.reduce((acc, val) => acc + val.point, 0)
@@ -58,9 +56,10 @@ const PointsWithArray = ({data, winWithMaxPoint, maxPoint}: {data: userGame, win
 
         if(t) {
             setMaxPointsIndex(t.indexOf(Math.max(...t)))
-            console.log(t.indexOf(Math.max(...t)))
             setMinPointsIndex(t.indexOf(Math.min(...t)))
         }
+        
+        return t;
     }
 
     const handleAddPoint = () => {
@@ -76,18 +75,20 @@ const PointsWithArray = ({data, winWithMaxPoint, maxPoint}: {data: userGame, win
             else {
                 data.participants[participantIndexToEditPoints]?.points?.push({round: roundNumberToEditPoints as number, point: pointsToAdd as number})
             }
-            refreshTotals()
 
-            // Add new round if complete and check if ended
+            const totals = refreshTotals()
+
             if(isEveryParticipantHasPoint(roundNumberToEditPoints)) {
                 if(data.nbRound !== undefined) {
                     if(data.nbRound == roundNumberToEditPoints) {
+                        checkIfAPlayerHasLost(totals)
                         data.nbRound += 1
                     }
                 }
             }
+            
             // Save points
-            gameStore.updateGame(data)
+            gameStore.updateGame(idOfGame, data)
         }
     }
 
@@ -97,37 +98,29 @@ const PointsWithArray = ({data, winWithMaxPoint, maxPoint}: {data: userGame, win
         });
     };
 
-    const checkIfAPlayerHasLost = () => {
-        if(totals) {
-            // Player with more than 100 points
-            const participantsWithMaxPointPlus = data.participants.filter(
-                (participant: Participant, index: number) => totals[index] >= maxPoint
+    const checkIfAPlayerHasLost = (totals: number[]) => {
+        // Player with more than 100 points
+        const participantsWithMaxPointPlus = data.participants.filter(
+            (participant: Participant, index: number) => totals[index] >= maxPoint
+        );
+
+        if(participantsWithMaxPointPlus.length > 0) {
+            const playerHasLost: Participant =  participantsWithMaxPointPlus.reduce((maxParticipant, participant) =>
+                // @ts-ignore
+                maxParticipant.points.reduce((acc, point) => acc + point.point, 0) > participant.points.reduce((acc, point) => acc + point.point, 0)
+                    ? maxParticipant
+                    : participant
             );
 
-            if(participantsWithMaxPointPlus.length > 0) {
-                const playerHasLost: Participant =  participantsWithMaxPointPlus.reduce((maxParticipant, participant) =>
-                    // @ts-ignore
-                    maxParticipant.points.reduce((acc, point) => acc + point.point, 0) > participant.points.reduce((acc, point) => acc + point.point, 0)
-                        ? maxParticipant
-                        : participant
-                );
+            if(playerHasLost) {
+                setPlayerHasLost(playerHasLost)
 
-                if(playerHasLost) {
-                    setPlayerHasLost(playerHasLost)
-
-                    return true;
-                }
+                return true;
             }
 
             return false;
         }
     }
-
-    useEffect(() => {
-        if(isEveryParticipantHasPoint(roundNumberToEditPoints)) {
-            checkIfAPlayerHasLost()
-        }
-    }, [totals, data]);
     
     return (
         <>

@@ -8,14 +8,14 @@ import SixQuiPrendPlayMode from "@/components/gamePlayMode/6quiprend";
 import Skyjo from "@/components/gamePlayMode/skyjo";
 
 const PlayGame = ({params}:{params: {id: string}}) => {
-    const [userGame, setUserGame] = useState<userGame>();
+    const [userGames, setUserGames] = useState<{id: string, games: userGame[]}>();
     
     useEffect(() => {
         if(params.id) {
             gameStore.getUserGame(params.id)
                 .then(response => {
                     if (response) {
-                        setUserGame(response.game)
+                        setUserGames(response.data)
                     }
                 })
         }
@@ -23,10 +23,10 @@ const PlayGame = ({params}:{params: {id: string}}) => {
     
     return (
         <>
-            {userGame && userGame.game.id && (
+            {userGames && userGames.id && (
                 <>
-                    {userGame.game.folderName === "6quiprend" && <SixQuiPrendPlayMode data={userGame}/>}
-                    {userGame.game.folderName === "skyjo" && <Skyjo data={userGame}/>}
+                    {userGames.games[0].game.folderName === "6quiprend" && <SixQuiPrendPlayMode data={userGames}/>}
+                    {userGames.games[0].game.folderName === "skyjo" && <Skyjo  data={userGames}/>}
                 </>
             )}
         </>

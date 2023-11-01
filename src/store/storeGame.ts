@@ -22,12 +22,13 @@ export const gameStore = {
             maxPlayer: undefined
         }
     ] as Game[],
-    createUserGame: async (game: Game, roundName: string, users: Participant[]) => {
-        const data = {game, roundName, participants: users, nbRound: 0, id: ''}
+    createUserGame: async (game: Game, users: Participant[]) => {
+        const data = {id: '', games: [{game, participants: users, nbRound: 0, id: ''}]}
         
         
         const uuid = generateUUID()
         data.id = uuid
+        data.games[0].id = generateUUID()
         localStorage.setItem(uuid, JSON.stringify(data))
         
         return {
@@ -39,17 +40,25 @@ export const gameStore = {
         const game = localStorage.getItem(`${id}`)
         
         if(game) {
-            const userGame: userGame = JSON.parse(game)
+            const userGame: {id: string, games: userGame[]} = JSON.parse(game)
 
-            return {success: true, game: userGame}
+            return {success: true, data: userGame}
         }
 
         return {success: false}
     },
-    updateGame: async (data: userGame) => {
-        console.log(data)
-        if(localStorage.getItem(data.id)) {
-            localStorage.setItem(data.id, JSON.stringify(data))
+    updateGame: async (idOfGame: string, data: userGame) => {
+        const game = localStorage.getItem(idOfGame);
+
+        if(game) {
+            const gamesFormatted: {id: string, games: userGame[]} = JSON.parse(game);
+
+            const gameModifiedIndex = gamesFormatted.games.findIndex(g => g.id === data.id)
+            if(gameModifiedIndex >= 0){
+                gamesFormatted.games[gameModifiedIndex] = data
+
+                localStorage.setItem(idOfGame, JSON.stringify(gamesFormatted))
+            }
         }
     }
 }

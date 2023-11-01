@@ -13,7 +13,6 @@ const WinnerAndLoserScreen = ({winner,loser, show, game}: {winner: Participant |
     
 
     useEffect(() => {
-        console.log(winner, loser)
         if(winner && loser) {
             setWinnerPoints(winner?.points?.reduce((acc, val) => acc + val.point, 0))
             setLoserPoints(loser?.points?.reduce((acc, val) => acc + val.point, 0))
