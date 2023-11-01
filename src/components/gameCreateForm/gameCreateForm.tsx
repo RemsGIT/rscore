@@ -10,7 +10,6 @@ import {gameStore} from "@/store/storeGame";
 import {Participant} from "@/types/participant";
 import ModalParticipant from "@/components/gameCreateForm/modalParticipant";
 import {useRouter} from "next/navigation";
-import ConfettiExplosion from "react-confetti-explosion";
 
 const GameCreateForm = ({game_id}: {game_id: number}) => {
     const router = useRouter();

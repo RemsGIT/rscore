@@ -9,6 +9,9 @@ html {
     transition: background-color .2s !important;
 }
 
+html,body{
+    height: 100%;
+}
 input {
     font-size: 16px !important;
     touch-action: manipulation;

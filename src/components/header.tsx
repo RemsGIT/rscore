@@ -33,7 +33,7 @@ const Header = () => {
 
             <NavbarContent className="" justify="end">
                 
-                {isMounted && theme === 'light' ? <Sun onClick={() => setTheme('dark')} /> : <MoonStar onClick={() => setTheme('light')}/>}
+                {isMounted && theme === 'light' ? <Sun onClick={() => setTheme('dark')} className={"cursor-pointer"} /> : <MoonStar onClick={() => setTheme('light')} className={"cursor-pointer"}/>}
 
             </NavbarContent>
         </Navbar>
