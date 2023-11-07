@@ -204,7 +204,7 @@ const PointsWithArray = ({idOfGame, data, winWithMaxPoint, maxPoint}: {idOfGame:
                     }}>
                         <ModalBody>
                             <div className={"mt-3"}>
-                                <Input type={"number"} inputMode={"numeric"}  onChange={(event) => setPointsToAdd(parseInt(event.target.value)) }/>
+                                <Input type={"number"} onChange={(event) => setPointsToAdd(parseInt(event.target.value)) }/>
                             </div>
                         </ModalBody>
                         <ModalFooter>

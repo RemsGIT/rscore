@@ -65,7 +65,7 @@ const GameCreateForm = ({game_id}: {game_id: number}) => {
             </div>
             
             { /* COUNTER  */ }
-            <div className={"mt-28"}>
+            <div>
                 <CountSlider handleChangeNumber={handleNbParticipantChange} />
             </div>
 
