@@ -3,14 +3,14 @@
 .value_container {
     width: 300px;
     border-bottom: 4px dashed #bdc3c7;
-    margin: 40px auto;
+    margin: 0 auto 40px;
     font-family: "Dosis", Helvetica, Arial, sans-serif;
 }
 .value {
     text-align: center;
     font-size: 10em;
     font-weight: bold;
-    height: 1.2em
+    line-height: 1em;
 }
 
 .input[type="range"] {
