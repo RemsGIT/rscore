@@ -216,7 +216,7 @@ const PointsWithArray = ({idOfGame, data, winWithMaxPoint, maxPoint}: {idOfGame:
                 </ModalContent>
             </Modal>
 
-            <WinnerAndLoserScreen winner={minPointsIndex ? data.participants[minPointsIndex] : null} loser={playerHasLost} show={playerHasLost !== null} game={data.game} idOfGame={idOfGame}/>
+            <WinnerAndLoserScreen winner={minPointsIndex !== undefined ? data.participants[minPointsIndex] : null} loser={playerHasLost} show={playerHasLost !== null} game={data.game} idOfGame={idOfGame}/>
         </>
     )
 }
