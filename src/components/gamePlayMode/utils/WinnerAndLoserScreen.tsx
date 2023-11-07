@@ -49,7 +49,7 @@ const WinnerAndLoserScreen = ({winner,loser, show, game, idOfGame}: {winner: Par
                             </div>
                             
                             <div className="loser mt-10">
-                                <span className={"text-danger-500 text-xl "}>{loser?.name} perd la partie avec {loserPoints} points</span>
+                                <span className={"text-danger-500 text-xl text-center"}>{loser?.name} perd la partie avec {loserPoints} points</span>
                             </div>
 
                             <div className={"mt-16"}>
